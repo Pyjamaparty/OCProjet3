@@ -11,16 +11,26 @@
 		rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+	<script src="https://kit.fontawesome.com/2719ef787b.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
+	<div class="top-banner show-if-logged">
+		<i class="fa-regular fa-pen-to-square top-banner-pen"></i>
+		<p class="top-banner-p">Mode édition</p>
+		<button class="top-banner-button">publier les changements</button>
+	</div>
+	<div class="show-if-logged" style="margin-bottom: 100px;"></div>
 	<header>
-		<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
+		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 		<nav>
 			<ul>
 				<li>projets</li>
 				<li>contact</li>
-				<li><a href="html/login.html" class="menulink">login</a></li>
+				<li>
+					<a href="html/login.html" id="login-id" class="menulink">login</a>
+					<a href="#" id="logout-id" class="menulink show-if-logged">logout</a>
+				</li>
 				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 			</ul>
 		</nav>
@@ -29,6 +39,10 @@
 		<section id="introduction">
 			<figure>
 				<img src="./assets/images/sophie-bluel.png" alt="">
+				<div class="modify-intro-div show-if-logged">
+					<i class="fa-regular fa-pen-to-square"></i>
+					<a href="#" class="menulink">modifier</a>
+				</div>
 			</figure>
 			<article>
 				<h2>Designer d'espace</h2>
@@ -42,9 +56,51 @@
 			</article>
 		</section>
 		<section id="portfolio">
-			<h2>Mes Projets</h2>
+			<div class="modify-projects-div">
+				<h2>Mes Projets</h2>
+				<div class="show-if-logged"><i class="fa-regular fa-pen-to-square"></i>
+					<a href="#" id="editButton" class="menulink">modifier</a>
+				</div>
+			</div>
+
+			<aside id="modal1" class="modal">
+				<div id="modalWrapper1" class="modal-wrapper">
+					<p class="modal-close-button">&times;</p>
+					<h3 class="modal-gallery-title">Galerie photo</h3>
+					<div id="modal1-gallery" class="modal-gallery"></div>
+					<button id="add-img" class="buttonmodal">Ajouter une photo</button>
+					<a href="#" id="delete-gallery">Supprimer la galerie</a>
+				</div>
+			</aside>
+			<aside id="modal2" class="modal">
+				<div id="modalWrapper2" class="modal-wrapper">
+					<div id="modal-header">
+						<i class="fa-solid fa-arrow-left-long back-arrow"></i>
+						<p class="modal-close-button">&times;</p>
+					</div>
+					<h3 class="modal-gallery-title">Ajout photo</h3>
+
+					<form id="add-img-form" action="#">
+						<div id="read-img-div" class="add-img-div">
+							<i class="fa-regular fa-image"></i>
+							<label for="addFile" class="label-file">+ Ajouter photo</label>
+							<input id="addFile" style="display: none;" type="file" required>
+							<p id="img-type">jpg, png : 4mo max</p>
+						</div>
+						<img id="preview-image" />
+						<label for="imgTitle">Titre</label>
+						<input type="text" name="imgTitle" id="imgTitle" required>
+						<label for="catergory-select">Catégorie</label>
+						<select name="category" id="categorySelect" required>
+							<option disabled selected value></option>
+						</select>
+						<div class="underline-div"> </div>
+						<input id="validate-add-img" class="buttonmodal" type="submit" value="Valider" disabled>
+					</form>
+				</div>
+			</aside>
 			<div id="filters">
-			<button autofocus id="buttonAll" class="buttonfilter">Tous</button>
+				<button autofocus id="buttonAll" class="buttonfilter activebutton" categoryId="0">Tous</button>
 			</div>
 			<div id="works" class="gallery">
 			</div>
@@ -73,6 +129,7 @@
 	</footer>
 
 	<script type="text/javascript" src="js/home.js"></script>
+	<script type="text/javascript" src="js/modal.js"></script>
 </body>
 
 </html>

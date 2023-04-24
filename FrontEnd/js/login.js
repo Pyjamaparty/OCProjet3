@@ -1,14 +1,18 @@
-const loginForm = document.getElementById("loginForm");
+const loginForm = document.getElementById("loginForm")
 
 loginForm.addEventListener("submit", (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
+    basicLogin(loginForm.email.value, loginForm.password.value)
+})
+
+async function basicLogin(email, password){
     let credentials = {
-        email: loginForm.email.value,
-        password: loginForm.password.value
-    };
+        email: email,
+        password: password
+    }
     
-    fetch('http://localhost:5678/api/users/login',
+    const response = await fetch('http://localhost:5678/api/users/login',
     {
         method: 'POST',
         headers: {
@@ -17,10 +21,14 @@ loginForm.addEventListener("submit", (e) => {
         body: JSON.stringify(credentials)
     }).then(response => {
         if (response.status === 200) {
-            // page accueil & login
-            window.location.href = "../index.html";
+            // get back to home page
+            window.location.href = "../index.html"
+            return response.json()
         } else {
-            alert("Votre email ou mot de passe est incorrect.");
+            alert("Votre email ou mot de passe est incorrect.")
         }
-    });
-})
+    })
+    
+    // save token in the local storage
+    localStorage.setItem('token', response.token)
+}
